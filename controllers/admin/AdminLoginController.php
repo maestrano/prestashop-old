@@ -124,11 +124,23 @@ class AdminLoginControllerCore extends AdminController
 	 */
 	public function viewAccess()
 	{
+    // Hook:Maestrano
+    // Redirect to SSO login
+    $maestrano = MaestranoService::getInstance();
+    if ($maestrano->isSsoEnabled()) {
+      header("Location: " . $maestrano->getSsoInitUrl());
+      exit;
+    }
+    
 		return true;
 	}
 	
 	public function postProcess()
 	{
+    // Hook:Maestrano
+    // Redirect if sso enabled
+    $this->viewAccess();
+    
 		if (Tools::isSubmit('submitLogin'))
 			$this->processLogin();
 		elseif (Tools::isSubmit('submitForgot'))

@@ -32,12 +32,37 @@ $timerStart = microtime(true);
 //	$_REQUEST['tab'] = $_REQUEST['controller'];
 try
 {
+  error_log("BLAAAAAAAAAAAAAAAAAAA INIT");
+  // Hook:Maestrano
+  // Get Service
+  $maestrano = MaestranoService::getInstance();
+  
 	$context = Context::getContext();
-	if (isset($_GET['logout']))
-		$context->employee->logout();
+	if (isset($_GET['logout'])) {
+    // Hook:Maestrano
+    // Logout
+    if ($maestrano->isSsoEnabled()) {
+      header("Location: " . $maestrano->getSsoLogoutUrl());
+      exit;
+    }
+    
+    $context->employee->logout();
+	}
 
-	if (!isset($context->employee) || !$context->employee->isLoggedBack())
-		Tools::redirectAdmin('index.php?controller=AdminLogin&redirect='.$_SERVER['REQUEST_URI']);
+	if (!isset($context->employee) || !$context->employee->isLoggedBack()) {
+	  Tools::redirectAdmin('index.php?controller=AdminLogin&redirect='.$_SERVER['REQUEST_URI']);
+	} else {
+    // Hook:Maestrano
+    // Check Maestrano session is still valid
+    if ($maestrano->isSsoEnabled()) {
+      if (!isset($_SESSION)) session_start();
+      if (!$maestrano->getSsoSession()->isValid()) {
+        header("Location: " . $maestrano->getSsoInitUrl());
+        exit;
+      }
+    }
+	}
+		
 
 	// Set current index
 	// @deprecated global will be removed in 1.6

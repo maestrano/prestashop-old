@@ -1756,8 +1756,18 @@ class AdminControllerCore extends Controller
 
 		$this->context->link = new Link($protocol_link, $protocol_content);
 
-		if (isset($_GET['logout']))
-			$this->context->employee->logout();
+		if (isset($_GET['logout'])) {
+		  $this->context->employee->logout();
+      
+      // Hook:Maestrano
+      // Logout
+      $maestrano = MaestranoService::getInstance();
+      if ($maestrano->isSsoEnabled()) {
+        header("Location: " . $maestrano->getSsoLogoutUrl());
+        exit;
+      }
+		}
+			
 
 		if ($this->controller_name != 'AdminLogin' && (!isset($this->context->employee) || !$this->context->employee->isLoggedBack()))
 			Tools::redirectAdmin($this->context->link->getAdminLink('AdminLogin').(!isset($_GET['logout']) ? '&redirect='.$this->controller_name : ''));
