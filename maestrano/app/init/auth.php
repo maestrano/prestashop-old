@@ -15,7 +15,8 @@ chdir(APP_DIR);
 
 // Need to define _PS_ADMIN_DIR before loading config.inc
 // so that application switches to admin mode
-define('_PS_ADMIN_DIR_', glob("admin*")[0]);
+$admin_dirs = glob("admin*");
+define('_PS_ADMIN_DIR_', $admin_dirs[0]);
 
 // Require the config file
 require_once APP_DIR . '/config/config.inc.php';
