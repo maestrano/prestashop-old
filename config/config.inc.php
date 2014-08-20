@@ -216,3 +216,17 @@ define('_PS_OS_WS_PAYMENT_', Configuration::get('PS_OS_WS_PAYMENT'));
 /* Get smarty */
 require_once(dirname(__FILE__).'/smarty.config.inc.php');
 $context->smarty = $smarty;
+
+// Hook:Maestrano
+// Load Maestrano
+require_once dirname(__FILE__) . '/../maestrano/app/init/base.php';
+$maestrano = MaestranoService::getInstance();
+// Require authentication straight away if intranet
+// mode enabled
+if ($maestrano->isSsoIntranetEnabled()) {
+  if (!isset($_SESSION)) session_start();
+  if (!$maestrano->getSsoSession()->isValid()) {
+    header("Location: " . $maestrano->getSsoInitUrl());
+    exit;
+  }
+}
