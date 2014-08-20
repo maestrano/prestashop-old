@@ -49,6 +49,10 @@ echo '
 		<script type="text/javascript" src="'._PS_JS_DIR_.'jquery/jquery-'._PS_JQUERY_VERSION_.'.min.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'jquery/plugins/jquery.hoverIntent.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'jquery/plugins/cluetip/jquery.cluetip.js"></script>
+    <script src="//cdn.maestrano.com/apps/mno_libs/mno-loader.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      window.mnoLoader.init("prestashop","1");
+    </script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'admin.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'toggle.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'tools.js"></script>
@@ -232,7 +236,7 @@ echo '		var html = "";
 						</div>';
 				}
 	echo		'</div>
-	
+
 	<div id="employee_box">
 				<div id="employee_infos">
 					<div class="employee_name">'.translate('Welcome,').' <strong>'.Context::getContext()->employee->firstname.'&nbsp'.Context::getContext()->employee->lastname.'</strong></div>
@@ -246,9 +250,9 @@ echo '		var html = "";
 						echo '<a href="'._PS_BASE_URL_.'" id="header_foaccess" target="_blank" title="'.translate('View my shop').'">'.translate('View my shop').'</a>';
 				echo '</div>
 			</div>
-			
+
 			<div id="header_search">
-			
+
 				<form method="post" action="index.php?controller=AdminSearch&amp;token='.Tools::getAdminTokenLite('AdminSearch').'">
 					<input type="text" name="bo_query" id="bo_query" value="'.Tools::safeOutput(Tools::stripslashes(Tools::getValue('bo_query'))).'" />
 					<select name="bo_search_type" id="bo_search_type" class="chosen no-search">
