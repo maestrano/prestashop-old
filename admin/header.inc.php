@@ -49,10 +49,6 @@ echo '
 		<script type="text/javascript" src="'._PS_JS_DIR_.'jquery/jquery-'._PS_JQUERY_VERSION_.'.min.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'jquery/plugins/jquery.hoverIntent.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'jquery/plugins/cluetip/jquery.cluetip.js"></script>
-    <script src="//cdn.maestrano.com/apps/mno_libs/mno-loader.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      window.mnoLoader.init("prestashop","1");
-    </script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'admin.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'toggle.js"></script>
 		<script type="text/javascript" src="'._PS_JS_DIR_.'tools.js"></script>
