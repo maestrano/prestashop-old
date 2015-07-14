@@ -32,11 +32,10 @@ $timerStart = microtime(true);
 //	$_REQUEST['tab'] = $_REQUEST['controller'];
 try
 {
-  error_log("BLAAAAAAAAAAAAAAAAAAA INIT");
   // Hook:Maestrano
   // Get Service
   $maestrano = MaestranoService::getInstance();
-  
+
 	$context = Context::getContext();
 	if (isset($_GET['logout'])) {
     // Hook:Maestrano
@@ -45,7 +44,7 @@ try
       header("Location: " . $maestrano->getSsoLogoutUrl());
       exit;
     }
-    
+
     $context->employee->logout();
 	}
 
@@ -62,12 +61,12 @@ try
       }
     }
 	}
-		
+
 
 	// Set current index
 	// @deprecated global will be removed in 1.6
 	global $currentIndex; // retrocompatibility;
-	$currentIndex = $_SERVER['SCRIPT_NAME'].(($controller = Tools::getValue('controller')) ? '?controller='.$controller: '');
+	$currentIndex = $_SERVER['SCRIPT_NAME'].(($controller = Tools::getValue('controller')) ? '?controller='.$controller: '?');
 
 	if ($back = Tools::getValue('back'))
 		$currentIndex .= '&back='.urlencode($back);
@@ -89,7 +88,7 @@ try
 		define('_PS_BASE_URL_SSL_', Tools::getShopDomainSsl(true));
 
 	$path = dirname(__FILE__).'/themes/';
-	// if the current employee theme is not valid (check layout.tpl presence), 
+	// if the current employee theme is not valid (check layout.tpl presence),
 	// reset to default theme
 	if (empty($context->employee->bo_theme) ||
 		!file_exists($path.$context->employee->bo_theme.'/template/layout.tpl'))
