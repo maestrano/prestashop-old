@@ -31,18 +31,6 @@
 
 
 	<div id="column_left">
-		{if $upgrade}
-		<div id="blockNewVersionCheck">
-		{if $upgrade->need_upgrade}
-			<div class="warning warn" style="margin-bottom:10px;"><h3>{l s='A new version of PrestaShop is available.'} : <a style="text-decoration: underline;" href="{$upgrade->link}" target="_blank">{l s='Download'} {$upgrade->version_name}</a> !</h3></div>
-		{/if}
-		</div>
-	{else}
-		<p>{l s='Update notifications are unavailable'}</p>
-		<p>&nbsp;</p>
-		<p>{l s='To receive PrestaShop update warnings, you need to activate you account. '} <b>allow_url_fopen</b> [<a href="http://www.php.net/manual/{$isoUser}/ref.filesystem.php">{l s='more info on php.net'}</a>]</p>
-		<p>{l s='If you don\'t know how to do this, please contact your hosting provider!'}</p><br />
-	{/if}
 
 {if $employee->bo_show_screencast}
 <div id="adminpresentation" style="display:block">
@@ -83,7 +71,7 @@ $(document).ready(function() {
 						jAlert("TECHNICAL ERROR: "+data.msg);
 
 					$('#adminpresentation').slideUp('slow');
-					
+
 				},
 				error: function(data, textStatus, errorThrown)
 				{
@@ -136,7 +124,7 @@ $(document).ready(function() {
 
 </div>
 	<div class="clear">&nbsp;</div>
-	
+
 	</div>
 
 <script type="text/javascript">
@@ -167,7 +155,7 @@ $(document).ready(function() {
 					$('#blockNewVersionCheck').fadeIn('slow');
 				}
 
-				
+
 			},
 			error: function(data, textStatus, errorThrown)
 			{
